@@ -1,5 +1,6 @@
 package com.domain.swplanetapi.domain;
 
+import com.domain.swplanetapi.jacoco.ExcludeFromJacocoGeneratedReport;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -24,7 +25,15 @@ public class Planet {
 
     public Planet() {
     }
+
     public Planet(String name, String climate, String terrain) {
+        this.name = name;
+        this.climate = climate;
+        this.terrain = terrain;
+    }
+
+    public Planet(Long id, String name, String climate, String terrain) {
+        this.id = id;
         this.name = name;
         this.climate = climate;
         this.terrain = terrain;
@@ -67,6 +76,7 @@ public class Planet {
         this.terrain = terrain;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,11 +85,13 @@ public class Planet {
         return Objects.equals(id, planet.id);
     }
 
+    @ExcludeFromJacocoGeneratedReport
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
 
+    @ExcludeFromJacocoGeneratedReport
     @Override
     public String toString() {
         return "Planet{" +

@@ -28,10 +28,6 @@ public class PlanetService {
         return repository.findByName(name);
     }
 
-    public List<Planet> findAll(){
-        return repository.findAll();
-    }
-
     public List<Planet> list(String terrain, String climate) {
         Example<Planet> query = QueryBuilder.makeQuery(new Planet(climate, terrain));
         return repository.findAll(query);

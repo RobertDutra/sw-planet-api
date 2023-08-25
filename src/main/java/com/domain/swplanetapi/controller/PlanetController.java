@@ -2,13 +2,14 @@ package com.domain.swplanetapi.controller;
 
 import com.domain.swplanetapi.domain.Planet;
 import com.domain.swplanetapi.service.PlanetService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/planets")
 public class PlanetController {
@@ -17,7 +18,7 @@ public class PlanetController {
     private PlanetService service;
 
     @PostMapping
-    public ResponseEntity<Planet> save(@RequestBody Planet planet){
+    public ResponseEntity<Planet> save(@RequestBody @Valid Planet planet){
         Planet createPlanet = service.save(planet);
         return ResponseEntity.status(HttpStatus.CREATED).body(planet);
     }
@@ -45,11 +46,5 @@ public class PlanetController {
     public ResponseEntity<Void> remove(@PathVariable("id") Long id) {
         service.remove(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Planet> findAll(){
-        return service.findAll();
     }
 }
